@@ -13,7 +13,7 @@
   </a>
 
   <img alt="License" src="https://img.shields.io/badge/license-MIT-brightgreen">
-   <a href="https://github.com/edgardfn/dt-money/stargazers">
+   <a href="https://github.com/edgardfn/github-blog/blob/main/LICENSE">
     <img alt="Stargazers" src="https://img.shields.io/github/stars/edgardfn/dt-money?style=social">
   </a>
 </p>
