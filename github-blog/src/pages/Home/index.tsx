@@ -22,19 +22,68 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faBuilding, faUserGroup } from '@fortawesome/free-solid-svg-icons'
 import { faGithub } from '@fortawesome/free-brands-svg-icons'
 import { PublicationCard } from '../../components/PublicationCard'
+import { useCallback, useEffect, useState } from 'react'
+import { apiGitHub } from '../../lib/axios'
+
+interface UserDataType {
+  login: string | null
+  avatar_url: string | null
+  name: string | null
+  html_url: string | null
+  bio: string | null
+  company: string | null
+  followers: number | null
+}
 
 export function Home() {
+  const [userData, setUserData] = useState<UserDataType>({
+    avatar_url: null,
+    bio: null,
+    company: null,
+    followers: null,
+    html_url: null,
+    login: null,
+    name: null,
+  })
+
+  useEffect(() => {
+    fetchUserData()
+  }, [])
+
+  const fetchUserData = useCallback(async () => {
+    const response = await apiGitHub.get('/users/rocketseat-education')
+    console.log('response ====', response)
+    setUserData({
+      avatar_url: response.data.avatar_url,
+      bio: response.data.bio,
+      company: response.data.company,
+      followers: response.data.followers,
+      html_url: response.data.html_url,
+      login: response.data.login,
+      name: response.data.name,
+    })
+  }, [])
+
   return (
     <HomeContainer>
       <ProfileContainer>
         <ProfileImage
-          src="https://images.unsplash.com/photo-1518020382113-a7e8fc38eac9?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2034&q=80"
+          src={
+            userData.avatar_url
+              ? userData.avatar_url
+              : 'https://icon-library.com/images/default-user-icon/default-user-icon-14.jpg'
+          }
           alt="photo-profile"
         ></ProfileImage>
         <InformationContainer>
           <HeaderInformationContainer>
-            <NameContainer>Cameron Williamson</NameContainer>
-            <GitLink href="https://github.com/edgardfn" target="_blank">
+            <NameContainer>
+              {userData.name ? userData.name : '------'}
+            </NameContainer>
+            <GitLink
+              href={userData.html_url ? userData.html_url : '#'}
+              target="_blank"
+            >
               <GitLinkContainer>
                 GITHUB
                 <img src={linkIcon} alt="link-icon" />
@@ -42,10 +91,7 @@ export function Home() {
             </GitLink>
           </HeaderInformationContainer>
           <MainInformationContainer>
-            Tristique volutpat pulvinar vel massa, pellentesque egestas. Eu
-            viverra massa quam dignissim aenean malesuada suscipit. Nunc,
-            volutpat pulvinar vel mass. Tristique volutpat pulvinar vel massa,
-            pellentesque egestas.
+            {userData.bio ? userData.bio : '-------'}
           </MainInformationContainer>
           <IconsContainer>
             <IconContent>
@@ -54,7 +100,7 @@ export function Home() {
                 color="#3A536B"
                 style={{ fontSize: '1.125rem' }}
               />
-              cameronwll
+              {userData.login ? userData.login : '------'}
             </IconContent>
             <IconContent>
               <FontAwesomeIcon
@@ -62,7 +108,7 @@ export function Home() {
                 color="#3A536B"
                 style={{ fontSize: '1.125rem' }}
               />
-              Rocketseat
+              {userData.company ? userData.company : '------'}
             </IconContent>
             <IconContent>
               <FontAwesomeIcon
@@ -70,7 +116,7 @@ export function Home() {
                 color="#3A536B"
                 style={{ fontSize: '1.125rem' }}
               />
-              32 seguidores
+              {userData.followers ? userData.followers : '0'} seguidores
             </IconContent>
           </IconsContainer>
         </InformationContainer>
