@@ -44,7 +44,7 @@ export interface issues {
   title: string
   body: string
   created_at: string
-  id: number
+  number: number
 }
 
 export function Home() {
@@ -190,7 +190,7 @@ export function Home() {
           {repoIssues.map((issue) => {
             return (
               <PublicationCard
-                key={issue.id}
+                key={issue.number}
                 body={issue.body}
                 created={issue.created_at}
                 title={issue.title}

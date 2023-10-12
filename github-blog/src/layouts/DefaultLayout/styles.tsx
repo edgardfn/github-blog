@@ -9,9 +9,10 @@ export const LayoutContainer = styled.div`
 
   display: flex;
   flex-direction: column;
+  min-height: 100vh;
   margin: 0 auto;
 
-  padding-bottom: 5rem;
+  /* padding-bottom: 5rem; */
 
   /* max-width: 90rem; */
 `
