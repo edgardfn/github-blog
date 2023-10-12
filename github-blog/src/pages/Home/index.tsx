@@ -24,6 +24,7 @@ import { faGithub } from '@fortawesome/free-brands-svg-icons'
 import { PublicationCard } from '../../components/PublicationCard'
 import { useCallback, useEffect, useState } from 'react'
 import { apiGitHub } from '../../lib/axios'
+import { useForm } from 'react-hook-form'
 
 interface UserDataType {
   login: string | null
@@ -35,7 +36,20 @@ interface UserDataType {
   followers: number | null
 }
 
+export interface publicationTextType {
+  publicationText: string | ''
+}
+
+export interface issues {
+  title: string
+  body: string
+  created_at: string
+  id: number
+}
+
 export function Home() {
+  // const [publicationSearchText, setPublicationSearchText] =
+  //   useState<publicationTextType>({ publicationText: '' })
   const [userData, setUserData] = useState<UserDataType>({
     avatar_url: null,
     bio: null,
@@ -45,14 +59,27 @@ export function Home() {
     login: null,
     name: null,
   })
+  const [repoIssues, setRepoIssues] = useState<issues[]>([])
+
+  const { register, handleSubmit } = useForm<publicationTextType>()
 
   useEffect(() => {
     fetchUserData()
+    fetchRepoIssuesData()
   }, [])
+
+  // useEffect(() => {
+  //   if (publicationSearchText.publicationText !== '') {
+  //     fetchSearchIssues(publicationSearchText.publicationText)
+  //   }
+  // }, [publicationSearchText])
+
+  const onSubmit = (data: publicationTextType) =>
+    fetchRepoIssuesData(data.publicationText)
 
   const fetchUserData = useCallback(async () => {
     const response = await apiGitHub.get('/users/rocketseat-education')
-    console.log('response ====', response)
+
     setUserData({
       avatar_url: response.data.avatar_url,
       bio: response.data.bio,
@@ -63,6 +90,26 @@ export function Home() {
       name: response.data.name,
     })
   }, [])
+
+  const fetchRepoIssuesData = useCallback(async (searchText = '') => {
+    const response = await apiGitHub.get(
+      `/search/issues?q=${searchText}%20repo:rocketseat-education/reactjs-github-blog-challenge`,
+    )
+    // const response = await apiGitHub.get(
+    //   '/repos/rocketseat-education/reactjs-github-blog-challenge/issues',
+    // )
+
+    setRepoIssues(response.data.items)
+  }, [])
+
+  // const fetchSearchIssues = useCallback(async (searchText: string) => {
+  //   console.log('searchText ===', searchText)
+  //   const response = await apiGitHub.get(
+  //     `/search/issues?q=${searchText}%20repo:rocketseat-education/reactjs-github-blog-challenge`,
+  //   )
+  //   console.log('response ====', response)
+  //   setRepoIssues(response.data.items)
+  // }, [])
 
   return (
     <HomeContainer>
@@ -126,17 +173,30 @@ export function Home() {
           <HeaderPublicationsSearchContainer>
             Publicações
             <AmountPublicationsContainer>
-              6 publicações
+              {`${repoIssues.length} ${
+                repoIssues.length === 1 ? 'publicação' : 'publicações'
+              }`}
             </AmountPublicationsContainer>
           </HeaderPublicationsSearchContainer>
-          <InputSearchPublications placeholder="Buscar conteúdo"></InputSearchPublications>
+          <form onSubmit={handleSubmit(onSubmit)}>
+            <InputSearchPublications
+              type="text"
+              placeholder="Buscar conteúdo"
+              {...register('publicationText')}
+            ></InputSearchPublications>
+          </form>
         </PublicationsSearchContainer>
         <ListPublicationsContainer>
-          <PublicationCard />
-          <PublicationCard />
-          <PublicationCard />
-          <PublicationCard />
-          <PublicationCard />
+          {repoIssues.map((issue) => {
+            return (
+              <PublicationCard
+                key={issue.id}
+                body={issue.body}
+                created={issue.created_at}
+                title={issue.title}
+              />
+            )
+          })}
         </ListPublicationsContainer>
       </PublicationsContainer>
     </HomeContainer>

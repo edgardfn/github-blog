@@ -119,6 +119,10 @@ export const PublicationsSearchContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+
+  form {
+    width: 100%;
+  }
 `
 
 export const HeaderPublicationsSearchContainer = styled.div`
@@ -164,10 +168,7 @@ export const InputSearchPublications = styled.input`
 export const ListPublicationsContainer = styled.div`
   margin-top: 3rem;
 
-  /* display: flex;
+  display: flex;
   flex-wrap: wrap;
-  gap: 2rem; */
-  display: grid;
-  grid-template-columns: 1fr 1fr;
   gap: 2rem;
 `

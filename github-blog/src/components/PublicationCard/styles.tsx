@@ -1,11 +1,9 @@
 import styled from 'styled-components'
 
 export const PublicationCardContainer = styled.div`
-  /* height: 16.25rem;
-  max-height: 16.25rem; */
   padding: 2rem;
-  /* width: calc(50% - 5rem);
-  max-width: calc(50% - 2.5rem); */
+  box-sizing: border-box;
+  width: 48%;
 
   border-radius: 0.625rem;
   background: ${(props) => props.theme['base-post']};
@@ -36,6 +34,10 @@ export const TimePublicationContainer = styled.div`
   font-style: normal;
   font-weight: 400;
   line-height: 160%;
+
+  p::first-letter {
+    text-transform: capitalize;
+  }
 `
 
 export const TextPublication = styled.div`
