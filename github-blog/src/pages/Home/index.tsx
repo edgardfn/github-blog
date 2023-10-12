@@ -40,11 +40,18 @@ export interface publicationTextType {
   publicationText: string | ''
 }
 
+interface UserData {
+  login: string
+}
+
 export interface issues {
   title: string
   body: string
   created_at: string
   number: number
+  html_url: string
+  user: UserData
+  comments: number
 }
 
 export function Home() {
@@ -194,6 +201,7 @@ export function Home() {
                 body={issue.body}
                 created={issue.created_at}
                 title={issue.title}
+                number={issue.number}
               />
             )
           })}
