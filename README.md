@@ -1,5 +1,5 @@
 <h4 align="center"> 
-	🚧  💸 Blog GitHub 1.0 💸  🚀 em construção... 🚧
+	💸 Blog GitHub 1.0 💸  🚀 
 </h4>
 
 <p align="center">
@@ -21,7 +21,7 @@
 
 ## 💻 Sobre o projeto
 
- 💻 GitHub-Blog - 
+ 💻 GitHub-Blog - Página Web que exibe dados de um perfil no github e lista as publicações de um repositório expecífico dele, é possível filtrar as publicações pelo nome e uma página para exibir detalhes mais completo da publicação.
 
 Projeto desenvolvido no curso da trilha Ignite da [Rocketseat].
 
