@@ -36,18 +36,51 @@ O layout da aplicação está disponível no Figma:
 
 ### Web
 
-🚧 Em construção... 🚧
+<img  title="HomeImage" src="./github-blog/src/assets/tela01.png" width="90%">
+
+  <img  title="ListPublications" src="./github-blog/src/assets/tela02.png" width="90%">
+  
+  <img  title="SearchPublications" src="./github-blog/src/assets/tela03.png" width="90%">
+  
+  <img  title="DetailsPublications" src="./github-blog/src/assets/tela04.png" width="90%">
+  
 
 ## 🛠 Tecnologias
 
 As seguintes ferramentas foram usadas na construção do projeto:
 
-🚧 Em construção... 🚧
-
+- [ReactJS]
+- [Typescript]
+- [React Router DOM]
+- [Styled Components]
+- [Effect Hook]
+- [Axios]
+- [Phosphor Icons]
+- [React Hook Form]
 
 ## 🚀 Como executar o projeto
 
-🚧 Em construção... 🚧
+### Pré-requisitos
+
+Antes de começar, você vai precisar ter instalado em sua máquina as seguintes ferramentas:
+[Git](https://git-scm.com), [Node.js][nodejs]. 
+Além disto é bom ter um editor para trabalhar com o código como [VSCode][vscode]
+
+```bash
+# Clone este repositório
+$ git clone https://github.com/edgardfn/github-blog.git
+
+# Acesse a pasta raiz do projeto no seu terminal/cmd
+$ cd github-blog
+
+# Instale as dependências
+$ npm install
+
+# Execute a aplicação em modo de desenvolvimento
+$ npm run start
+
+# A aplicação será aberta na porta:3000 - acesse http://localhost:3000
+```
 
 
 ## 📝 Licença
@@ -80,3 +113,4 @@ Feito com ❤️ por Edgard Finotti Neto 👋🏽 [Entre em contato!](https://ww
 [Context API]: https://reactjs.org/docs/context.html
 [Redux]: https://react-redux.js.org/
 [Effect Hook]: https://reactjs.org/docs/hooks-effect.html
+[React Hook Form]: https://react-hook-form.com/
